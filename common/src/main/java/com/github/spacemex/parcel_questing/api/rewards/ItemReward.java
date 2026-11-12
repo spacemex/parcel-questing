@@ -8,6 +8,7 @@ import java.util.Objects;
 import static com.github.spacemex.parcel_questing.ParcelQuesting.MOD_ID;
 
 public record ItemReward(ItemStack stack) implements BaseReward {
+
     public ItemReward {
         Objects.requireNonNull(stack);
 
