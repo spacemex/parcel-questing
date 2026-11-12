@@ -1,7 +1,7 @@
-package com.github.spacemex.parcel_questing.JsonObjects;
+package com.github.spacemex.parcel_questing.quest;
 
-import com.github.spacemex.parcel_questing.api.requirements.Requirement;
-import com.github.spacemex.parcel_questing.api.rewards.BaseReward;
+import com.github.spacemex.parcel_questing.api.requirement.Requirement;
+import com.github.spacemex.parcel_questing.api.reward.BaseReward;
 import net.minecraft.resources.Identifier;
 
 import java.util.List;

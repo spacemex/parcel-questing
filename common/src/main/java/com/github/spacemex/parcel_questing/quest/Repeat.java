@@ -1,4 +1,4 @@
-package com.github.spacemex.parcel_questing.JsonObjects;
+package com.github.spacemex.parcel_questing.quest;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

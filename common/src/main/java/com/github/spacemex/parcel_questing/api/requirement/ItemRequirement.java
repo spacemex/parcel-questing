@@ -1,5 +1,6 @@
-package com.github.spacemex.parcel_questing.api.requirements;
+package com.github.spacemex.parcel_questing.api.requirement;
 
+import com.github.spacemex.parcel_questing.api.TargetType;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
@@ -48,7 +49,7 @@ public record ItemRequirement(String uniqueId, TargetType targetType, Identifier
         Objects.requireNonNull(target, "target");
         Objects.requireNonNull(uniqueId, "uniqueId");
 
-        if (uniqueId.isEmpty()) {
+        if (uniqueId.isBlank()) {
             throw new IllegalArgumentException("Requirement ID cannot be blank");
         }
 

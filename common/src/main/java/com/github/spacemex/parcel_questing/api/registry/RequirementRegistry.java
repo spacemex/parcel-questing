@@ -1,8 +1,9 @@
-package com.github.spacemex.parcel_questing.api.requirements.registry;
+package com.github.spacemex.parcel_questing.api.registry;
 
-import com.github.spacemex.parcel_questing.api.requirements.FluidRequirement;
-import com.github.spacemex.parcel_questing.api.requirements.ItemRequirement;
-import com.github.spacemex.parcel_questing.api.requirements.Requirement;
+import com.github.spacemex.parcel_questing.api.requirement.BiomeRequirement;
+import com.github.spacemex.parcel_questing.api.requirement.FluidRequirement;
+import com.github.spacemex.parcel_questing.api.requirement.ItemRequirement;
+import com.github.spacemex.parcel_questing.api.requirement.Requirement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
@@ -43,5 +44,6 @@ public final class RequirementRegistry {
     static {
         register(Identifier.fromNamespaceAndPath(MOD_ID, "item"), ItemRequirement.MAP_CODEC);
         register(Identifier.fromNamespaceAndPath(MOD_ID, "fluid"), FluidRequirement.MAP_CODEC);
+        register(Identifier.fromNamespaceAndPath(MOD_ID, "biome"), BiomeRequirement.MAP_CODEC);
     }
 }

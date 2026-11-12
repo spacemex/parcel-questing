@@ -1,9 +1,9 @@
-package com.github.spacemex.parcel_questing.api.rewards.registry;
+package com.github.spacemex.parcel_questing.api.registry;
 
-import com.github.spacemex.parcel_questing.api.rewards.BaseReward;
-import com.github.spacemex.parcel_questing.api.rewards.ExperienceReward;
-import com.github.spacemex.parcel_questing.api.rewards.ItemReward;
-import com.github.spacemex.parcel_questing.api.rewards.MoneyReward;
+import com.github.spacemex.parcel_questing.api.reward.BaseReward;
+import com.github.spacemex.parcel_questing.api.reward.ExperienceReward;
+import com.github.spacemex.parcel_questing.api.reward.ItemReward;
+import com.github.spacemex.parcel_questing.api.reward.MoneyReward;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;

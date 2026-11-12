@@ -1,4 +1,4 @@
-package com.github.spacemex.parcel_questing.api.rewards;
+package com.github.spacemex.parcel_questing.api.reward;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

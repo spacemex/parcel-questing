@@ -1,4 +1,4 @@
-package com.github.spacemex.parcel_questing.api.requirements;
+package com.github.spacemex.parcel_questing.api.requirement;
 
 import net.minecraft.resources.Identifier;
 
