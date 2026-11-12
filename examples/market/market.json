@@ -1,38 +1,7 @@
 [
   {
-    "type": "parcel_questing:item",
-    "item": "minecraft:oak_log",
-    "amount": 16,
-    "requirement": [
-      {
-        "type": "parcel_questing:item",
-        "tag": "minecraft:logs",
-        "amount": 16
-      }
-    ]
-  },
-  {
-    "type": "parcel_questing:item",
-    "item": "minecraft:cobblestone",
-    "amount": 16,
-    "requirements": [
-      {
-        "type": "parcel_questing:item",
-        "item": "minecraft:stone",
-        "amount": 16
-      }
-    ]
-  },
-  {
-    "type": "parcel_questing:fluid",
-    "fluid": "minecraft:lava",
-    "amount": 10000,
-    "requirements": [
-      {
-        "type": "parcel_questing:item",
-        "item": "minecraft:obsidian",
-        "amount": 32
-      }
-    ]
+    "item": "minecraft:log",
+    "quantity": 16,
+    "price": 100
   }
 ]

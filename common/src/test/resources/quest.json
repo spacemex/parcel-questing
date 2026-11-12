@@ -1,0 +1,41 @@
+{
+  "id": "example_mod:starter_quest",
+  "title": "The Lumberjack's First Task",
+  "description": "Collect supplies and explore the forest.",
+  "type": "parcel_questing:letter",
+  "issuer": {
+    "name": "John the Lumberjack",
+    "skin": "parcel_questing:lumberjack"
+  },
+  "requiredLevel": 1,
+  "maxLevel": 100,
+  "repeat": {
+    "enabled": true,
+    "cooldownTicks": 72000
+  },
+  "forceQuest": false,
+  "depends": [],
+  "requirements": [
+    {
+      "id": "collect_logs",
+      "type": "parcel_questing:item",
+      "tag": "minecraft:logs",
+      "amount": 16
+    },
+    {
+      "id": "visit_forest",
+      "type": "parcel_questing:biome",
+      "tag": "minecraft:is_forest"
+    }
+  ],
+  "rewards": [
+    {
+      "type": "parcel_questing:money",
+      "amount": 100
+    },
+    {
+      "type": "parcel_questing:group_experience",
+      "amount": 25
+    }
+  ]
+}

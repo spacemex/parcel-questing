@@ -1,8 +1,11 @@
 import com.github.spacemex.parcel_questing.api.registry.RequirementRegistry;
 import com.github.spacemex.parcel_questing.api.requirement.Requirement;
+import com.github.spacemex.parcel_questing.quest.Quest;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
+import net.minecraft.resources.Identifier;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,13 +13,13 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParcelDeliveryTest {
     private static final String ITEM_REQUIREMENT_PATH = "/item_requirement.json";
     private static final String FLUID_REQUIREMENT_PATH = "/fluid_requirement.json";
     private static final String BIOME_REQUIREMENT_PATH = "/biome_requirement.json";
+    private static final String QUEST = "/quest.json";
 
     @Test
     void testItemRequirementDecoding() throws IOException {
@@ -46,6 +49,49 @@ public class ParcelDeliveryTest {
     @Test
     void testBiomeRequirementRoundTrip() throws IOException {
         testRequirementRoundTrip(loadJson(BIOME_REQUIREMENT_PATH));
+    }
+
+    @Test
+    void testQuestDecoding() throws IOException {
+        JsonElement json = loadJson(QUEST);
+
+        Quest quest = Quest.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
+
+        assertNotNull(quest);
+
+        assertEquals(Identifier.parse("example_mod:starter_quest"), quest.id());
+        assertEquals("The Lumberjack's First Task", quest.title());
+        assertEquals(2, quest.requirements().size());
+        assertEquals(2, quest.rewards().size());
+
+        assertTrue(quest.repeat().enabled());
+
+        assertEquals(72000L, quest.repeat().cooldownTicks());
+    }
+
+    @Test
+    void testQuestRoundTrip() throws IOException {
+        JsonElement json = loadJson(QUEST);
+
+        Quest og = Quest.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
+
+        JsonElement encoded = Quest.CODEC.encodeStart(JsonOps.INSTANCE, og).getOrThrow();
+
+        Quest decoded = Quest.CODEC.parse(JsonOps.INSTANCE, encoded).getOrThrow();
+
+        assertEquals(og, decoded);
+    }
+
+    @Test
+    void testDuplicateRequirementIds() throws IOException {
+        JsonObject json = loadJson(QUEST).getAsJsonObject();
+
+        json.getAsJsonArray("requirements")
+                .get(1).getAsJsonObject().addProperty("id", "collect_logs");
+
+        var result = Quest.CODEC.parse(JsonOps.INSTANCE, json);
+
+        assertTrue(result.error().isPresent(), "Duplicate requirement IDs should fail while decoding");
     }
 
     private static void testRequirementRoundTrip(JsonElement loadedJson) throws IOException {
