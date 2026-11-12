@@ -1,0 +1,12 @@
+[
+  {
+    "id": "visit_forest",
+    "type": "parcel_questing:biome",
+    "biome": "minecraft:forest"
+  },
+  {
+    "id": "visit_any_forest",
+    "type": "parcel_questing:biome",
+    "tag": "minecraft:is_forest"
+  }
+]

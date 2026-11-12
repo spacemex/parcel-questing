@@ -14,4 +14,7 @@ val architecturyApiVersion = providers.gradleProperty("architectury_api_version"
 dependencies {
     implementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     implementation("dev.architectury:architectury:$architecturyApiVersion")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:6.1.3")
+    testImplementation("org.junit.platform:junit-platform-launcher:6.1.3")
 }
