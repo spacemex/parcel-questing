@@ -1,0 +1,14 @@
+[
+  {
+    "id": "deliver_water",
+    "type": "parcel_questing:fluid",
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  {
+    "id": "deliver_lava",
+    "type": "parcel_questing:fluid",
+    "tag": "c:fluids/lava",
+    "amount": 1000
+  }
+]

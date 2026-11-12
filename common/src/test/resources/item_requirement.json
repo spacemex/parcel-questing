@@ -1,0 +1,14 @@
+[
+  {
+    "id": "collect_logs",
+    "type": "parcel_questing:item",
+    "tag": "minecraft:logs",
+    "amount": 16
+  },
+  {
+    "id": "collect_diamonds",
+    "type": "parcel_questing:item",
+    "item": "minecraft:item",
+    "amount": 5
+  }
+]
