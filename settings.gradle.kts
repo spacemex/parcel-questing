@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "example-mod"
+rootProject.name = "parcel-questing"
 
 include("common")
 include("fabric")

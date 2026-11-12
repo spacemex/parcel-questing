@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "id": "example-mod",
+  "id": "parcel_questing",
   "version": "${version}",
-  "name": "Example Mod",
+  "name": "Parcel Questing",
   "description": "",
   "authors": [
-    "Example User"
+    "Space_Mex"
   ],
   "license": "MIT",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "com.example.mod.data.ExampleModDataGenerator"
+      "com.github.spacemex.data.ParcelQuestingDataGenerator"
     ],
     "main": [
-      "com.example.mod.ExampleModFabric"
+      "com.github.spacemex.ParcelQuestingFabric"
     ],
     "client": [
-      "com.example.mod.client.ExampleModFabricClient"
+      "com.github.spacemex.client.ParcelQuestingFarbicClient"
     ]
   },
   "depends": {

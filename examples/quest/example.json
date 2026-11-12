@@ -1,0 +1,82 @@
+{
+  "id": "example_mod:example_quest",
+  "title": "The Lumberjack's Supply Run",
+  "description": "John the Lumberjack needs supplies for his lumber company. Gather the requested materials and deliver them to complete the contract.",
+  "type": "parcel_questing:letter",
+  "issuer": {
+    "name": "John the Lumberjack",
+    "skin": "parcel_questing:lumberjack"
+  },
+  "requiredLevel": 1,
+  "maxLevel": 100,
+  "repeat": {
+    "enabled": true,
+    "cooldownTicks": 72000
+  },
+  "forceQuest": false,
+  "depends": [
+    "example_mod:example_quest_getting_started_1"
+  ],
+  "requirements": [
+    {
+      "type": "parcel_questing:item",
+      "tag": "minecraft:logs",
+      "amount": 16
+    },
+    {
+      "type": "parcel_questing:item",
+      "item": "custom_mod:flannel_shirt",
+      "amount": 1
+    },
+    {
+      "type": "parcel_questing:fluid",
+      "tag": "c:fluids/lava",
+      "amount": 1000
+    },
+    {
+      "type": "parcel_questing:fluid",
+      "fluid": "custom_mod:maple_syrup",
+      "amount": 1000
+    },
+    {
+      "type": "parcel_questing:biome",
+      "tag": "minecraft:is_forest"
+    },
+    {
+      "type": "parcel_questing:item",
+      "item": "custom_mod:photo",
+      "predicates": {
+        "minecraft:custom_data": {
+          "entity": "minecraft:cow"
+        }
+      },
+      "amount": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "parcel_questing:item",
+      "stack": {
+        "id": "minecraft:stone_axe",
+        "count": 1,
+        "components": {
+          "minecraft:enchantments": {
+            "minecraft:unbreaking": 2,
+            "minecraft:efficiency": 3
+          }
+        }
+      }
+    },
+    {
+      "type": "parcel_questing:item",
+      "stack": {
+        "id": "minecraft:oak_log",
+        "count": 64
+      }
+    },
+    {
+      "type": "parcel_questing:group_experience",
+      "amount": 10
+    }
+  ]
+}
