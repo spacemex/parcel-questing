@@ -24,7 +24,7 @@ public record Quest(Identifier id, String title, String description, Identifier 
         }
 
         if (maxLevel < requiredLevel) {
-            throw new IllegalArgumentException("Required level cannot be less than required level.");
+            throw new IllegalArgumentException("Maximum level cannot be less than required level.");
         }
 
         depends = List.copyOf(depends);

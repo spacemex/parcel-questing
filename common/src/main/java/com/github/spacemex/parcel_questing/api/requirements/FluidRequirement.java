@@ -36,7 +36,7 @@ public record FluidRequirement(String uniqueId, TargetType targetType, Identifie
     }
 
     @Override
-    public String UniqueIdentifier() {
+    public String uniqueIdentifier() {
         return uniqueId;
     }
 

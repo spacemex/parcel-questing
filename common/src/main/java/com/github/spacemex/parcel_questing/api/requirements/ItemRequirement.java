@@ -36,7 +36,7 @@ public record ItemRequirement(String uniqueId, TargetType targetType, Identifier
     }
 
     @Override
-    public String UniqueIdentifier() {
+    public String uniqueIdentifier() {
         return uniqueId;
     }
 
