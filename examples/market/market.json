@@ -1,7 +1,10 @@
 [
   {
-    "item": "minecraft:log",
-    "quantity": 16,
+    "stack": {
+      "id": "minecraft:oak_log",
+      "count": 16,
+      "components": {}
+    },
     "price": 100
   }
 ]
