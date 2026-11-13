@@ -36,9 +36,12 @@ public final class QuestReloadListener extends SimpleJsonResourceReloadListener<
             loaded.put(fileId, quest);
         }
 
-        quests = Map.copyOf(loaded);
+        Map<Identifier, Quest> validQuests = QuestDependencyValidator.validate(loaded);
+        int rejected = loaded.size() - validQuests.size();
 
-        ParcelQuesting.LOGGER.info("Loaded {} Parcel Questing quest", quests.size());
+        quests = validQuests;
+
+        ParcelQuesting.LOGGER.info("Loaded {} Parcel Questing quests ({} rejected)", quests.size(), rejected);
     }
 
     public Optional<Quest> get(Identifier id) {
