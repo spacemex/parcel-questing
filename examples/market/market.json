@@ -1,10 +1,35 @@
-[
-  {
-    "stack": {
-      "id": "minecraft:oak_log",
-      "count": 16,
-      "components": {}
-    },
-    "price": 100
-  }
-]
+{
+  "listings": [
+    {
+      "stack": {
+        "id": "minecraft:oak_log",
+        "count": 16,
+        "components": {}
+      },
+      "allowed_payments": [
+        {
+          "type": "parcel_questing:money",
+          "amount": 10
+        },
+        {
+          "type": "parcel_questing:minecraft_experience",
+          "level": 20
+        },
+        {
+          "type": "parcel_questing:minecraft_experience",
+          "points": 7200
+        },
+        {
+          "type": "parcel_questing:item",
+          "item": "minecraft:oak_planks",
+          "amount": 5
+        },
+        {
+          "type": "parcel_questing:item",
+          "tag": "c:stone",
+          "amount": 5
+        }
+      ]
+    }
+  ]
+}
