@@ -11,13 +11,13 @@
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "com.github.spacemex.data.ParcelQuestingDataGenerator"
+      "com.github.spacemex.parcel_questing.data.ParcelQuestingDataGenerator"
     ],
     "main": [
-      "com.github.spacemex.ParcelQuestingFabric"
+      "com.github.spacemex.parcel_questing.ParcelQuestingFabric"
     ],
     "client": [
-      "com.github.spacemex.client.ParcelQuestingFarbicClient"
+      "com.github.spacemex.parcel_questing.client.ParcelQuestingFabricClient"
     ]
   },
   "depends": {

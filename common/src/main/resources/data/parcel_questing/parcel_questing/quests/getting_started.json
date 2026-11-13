@@ -1,0 +1,50 @@
+{
+  "id": "parcel_questing:getting_started",
+  "title": "Example Quest",
+  "description": "Supply John The Lumberjack with the required materials",
+  "type": "parcel_questing:letter",
+  "issuer": {
+    "name": "John The Lumberjack",
+    "skin": "parcel_questing:lumberjack"
+  },
+  "requiredLevel": 1,
+  "maxLevel": 100,
+  "repeat": {
+    "enabled": true,
+    "cooldownTicks": 72000
+  },
+  "forceQuest": false,
+  "depends": [],
+  "requirements": [
+    {
+      "id": "collect_logs",
+      "type": "parcel_questing:item",
+      "tag": "minecraft:logs",
+      "amount": 16
+    },
+    {
+      "id": "collect_stone_axe",
+      "type": "parcel_questing:item",
+      "item": "minecraft:stone_axe",
+      "amount": 1
+    }
+  ],
+  "rewards": [
+    {
+      "type": "parcel_questing:item",
+      "stack": {
+        "id": "minecraft:diamond",
+        "count": 1,
+        "components": {}
+      }
+    },
+    {
+      "type": "parcel_questing:group_experience",
+      "amount": 10
+    },
+    {
+      "type": "parcel_questing:money",
+      "amount": 100
+    }
+  ]
+}
