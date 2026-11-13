@@ -1,6 +1,7 @@
 package com.github.spacemex.parcel_questing;
 
 import com.github.spacemex.parcel_questing.quest.QuestReloadListener;
+import com.github.spacemex.parcel_questing.quest.group.QuestGroupService;
 import dev.architectury.registry.ReloadListenerRegistry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackType;
@@ -15,6 +16,8 @@ public final class ParcelQuesting {
 
     public static void initialize() {
         ReloadListenerRegistry.register(PackType.SERVER_DATA, QUESTS, Identifier.fromNamespaceAndPath(MOD_ID, "quests"));
+
+        QuestGroupService.initialize();
 
         LOGGER.info("Parcel Questing initialized!");
     }

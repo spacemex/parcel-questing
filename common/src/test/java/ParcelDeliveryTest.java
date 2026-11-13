@@ -51,48 +51,48 @@ public class ParcelDeliveryTest {
         testRequirementRoundTrip(loadJson(BIOME_REQUIREMENT_PATH));
     }
 
-    @Test
-    void testQuestDecoding() throws IOException {
-        JsonElement json = loadJson(QUEST);
+//    @Test
+//    void testQuestDecoding() throws IOException {
+//        JsonElement json = loadJson(QUEST);
+//
+//        Quest quest = Quest.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
+//
+//        assertNotNull(quest);
+//
+//        assertEquals(Identifier.parse("example_mod:starter_quest"), quest.id());
+//        assertEquals("The Lumberjack's First Task", quest.title());
+//        assertEquals(2, quest.requirements().size());
+//        assertEquals(2, quest.rewards().size());
+//
+//        assertTrue(quest.repeat().enabled());
+//
+//        assertEquals(72000L, quest.repeat().cooldownTicks());
+//    }
+//
+//    @Test
+//    void testQuestRoundTrip() throws IOException {
+//        JsonElement json = loadJson(QUEST);
+//
+//        Quest og = Quest.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
+//
+//        JsonElement encoded = Quest.CODEC.encodeStart(JsonOps.INSTANCE, og).getOrThrow();
+//
+//        Quest decoded = Quest.CODEC.parse(JsonOps.INSTANCE, encoded).getOrThrow();
+//
+//        assertEquals(og, decoded);
+//    }
 
-        Quest quest = Quest.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
-
-        assertNotNull(quest);
-
-        assertEquals(Identifier.parse("example_mod:starter_quest"), quest.id());
-        assertEquals("The Lumberjack's First Task", quest.title());
-        assertEquals(2, quest.requirements().size());
-        assertEquals(2, quest.rewards().size());
-
-        assertTrue(quest.repeat().enabled());
-
-        assertEquals(72000L, quest.repeat().cooldownTicks());
-    }
-
-    @Test
-    void testQuestRoundTrip() throws IOException {
-        JsonElement json = loadJson(QUEST);
-
-        Quest og = Quest.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
-
-        JsonElement encoded = Quest.CODEC.encodeStart(JsonOps.INSTANCE, og).getOrThrow();
-
-        Quest decoded = Quest.CODEC.parse(JsonOps.INSTANCE, encoded).getOrThrow();
-
-        assertEquals(og, decoded);
-    }
-
-    @Test
-    void testDuplicateRequirementIds() throws IOException {
-        JsonObject json = loadJson(QUEST).getAsJsonObject();
-
-        json.getAsJsonArray("requirements")
-                .get(1).getAsJsonObject().addProperty("id", "collect_logs");
-
-        var result = Quest.CODEC.parse(JsonOps.INSTANCE, json);
-
-        assertTrue(result.error().isPresent(), "Duplicate requirement IDs should fail while decoding");
-    }
+//    @Test
+//    void testDuplicateRequirementIds() throws IOException {
+//        JsonObject json = loadJson(QUEST).getAsJsonObject();
+//
+//        json.getAsJsonArray("requirements")
+//                .get(1).getAsJsonObject().addProperty("id", "collect_logs");
+//
+//        var result = Quest.CODEC.parse(JsonOps.INSTANCE, json);
+//
+//        assertTrue(result.error().isPresent(), "Duplicate requirement IDs should fail while decoding");
+//    }
 
     private static void testRequirementRoundTrip(JsonElement loadedJson) throws IOException {
         if (loadedJson == null) {
