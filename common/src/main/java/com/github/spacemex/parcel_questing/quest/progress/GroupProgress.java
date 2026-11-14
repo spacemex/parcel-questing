@@ -89,8 +89,8 @@ public record GroupProgress(int level, long totalExperience, long balance, Map<I
         return new GroupProgress(level, totalExperience, balance, quests);
     }
 
-    public boolean hasBalance(long a) {
-        return balance() >= a;
+    public boolean hasBalance(long amount) {
+        return amount >= 0 && balance >= amount;
     }
 
     public GroupProgress withQuest(Identifier questId, QuestProgress progress) {
