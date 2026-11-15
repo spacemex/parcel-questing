@@ -1,7 +1,9 @@
 package com.github.spacemex.parcel_questing.quest;
 
 import com.github.spacemex.parcel_questing.ParcelQuesting;
+import com.github.spacemex.parcel_questing.api.registry.RewardRegistry;
 import com.github.spacemex.parcel_questing.api.requirement.Requirement;
+import com.github.spacemex.parcel_questing.api.reward.BaseReward;
 import com.github.spacemex.parcel_questing.quest.group.QuestGroupId;
 import com.github.spacemex.parcel_questing.quest.group.QuestGroupService;
 import com.github.spacemex.parcel_questing.quest.progress.GroupProgress;
@@ -174,5 +176,66 @@ public final class QuestService {
         savedData.setGroup(groupId, updated);
 
         return QuestProgressStatus.UPDATED;
+    }
+
+    public static QuestCompleteStatus completeQuest(ServerPlayer player, Identifier questId) {
+        Objects.requireNonNull(player);
+        Objects.requireNonNull(questId);
+
+        Optional<Quest> questOptional = ParcelQuesting.QUESTS.get(questId);
+
+        if (questOptional.isEmpty()) {
+            return QuestCompleteStatus.QUEST_NOT_FOUND;
+        }
+
+        Optional<QuestGroupId> groupOptional = QuestGroupService.getGroupFor(player);
+
+        if (groupOptional.isEmpty()) {
+            return QuestCompleteStatus.GROUP_NOT_FOUND;
+        }
+
+        Quest quest = questOptional.get();
+        QuestGroupId groupId = groupOptional.get();
+        GroupProgressSavedData savedData = GroupProgressSavedData.get(player.level().getServer());
+        GroupProgress group = savedData.getGroup(groupId);
+        Optional<QuestProgress> progressOptional = group.getQuest(questId);
+
+        if (progressOptional.isEmpty()) {
+            return QuestCompleteStatus.QUEST_NOT_ACCEPTED;
+        }
+
+        QuestProgress progress = progressOptional.get();
+
+        if (!progress.active()) {
+            return QuestCompleteStatus.QUEST_NOT_ACTIVE;
+        }
+
+        if (!isReadyToComplete(quest, progress)) {
+            return QuestCompleteStatus.REQUIREMENTS_INCOMPLETE;
+        }
+
+        RewardPlan rewards = new RewardPlan();
+        GroupProgress updated;
+
+        try {
+            for (BaseReward reward : quest.rewards()) {
+                RewardRegistry.planReward(reward, rewards);
+            }
+
+            long gameTick = player.level().getGameTime();
+
+            updated = group.completeQuest(questId, gameTick);
+            updated = rewards.applyTo(updated);
+
+        } catch (RuntimeException e) {
+            ParcelQuesting.LOGGER.error("Could not prepare rewards for quest {}", questId, e);
+            return QuestCompleteStatus.REWARD_ERROR;
+        }
+
+        savedData.setGroup(groupId, updated);
+        rewards.deliverTo(player);
+
+        ParcelQuesting.LOGGER.debug("Group {} completed quest {}", groupId, questId);
+        return QuestCompleteStatus.COMPLETED;
     }
 }

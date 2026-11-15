@@ -2,6 +2,7 @@ package com.github.spacemex.parcel_questing.command;
 
 import com.github.spacemex.parcel_questing.ParcelQuesting;
 import com.github.spacemex.parcel_questing.quest.QuestAcceptStatus;
+import com.github.spacemex.parcel_questing.quest.QuestCompleteStatus;
 import com.github.spacemex.parcel_questing.quest.QuestService;
 import com.github.spacemex.parcel_questing.quest.group.QuestGroupId;
 import com.github.spacemex.parcel_questing.quest.group.QuestGroupService;
@@ -48,6 +49,16 @@ public final class QuestCommands {
                                                                             StringArgumentType.greedyString()
                                                                     )
                                                                     .executes(QuestCommands::status)
+                                                    )
+                                    )
+                                    .then(
+                                            Commands.literal("complete")
+                                                    .then(
+                                                            Commands.argument(
+                                                                            "id",
+                                                                            StringArgumentType.greedyString()
+                                                                    )
+                                                                    .executes(QuestCommands::complete)
                                                     )
                                     )
                     );
@@ -158,5 +169,40 @@ public final class QuestCommands {
 
             return null;
         }
+    }
+
+    private static int complete(
+            CommandContext<CommandSourceStack> context
+    ) throws CommandSyntaxException {
+
+        ServerPlayer player = context.getSource().getPlayerOrException();
+
+        Identifier questId = parseId(context);
+
+        if (questId == null) {
+            return 0;
+        }
+
+        QuestCompleteStatus result =
+                QuestService.completeQuest(player, questId);
+
+        if (result == QuestCompleteStatus.COMPLETED) {
+            context.getSource().sendSuccess(
+                    () -> Component.literal(
+                            "Completed quest: " + questId
+                    ),
+                    false
+            );
+
+            return Command.SINGLE_SUCCESS;
+        }
+
+        context.getSource().sendFailure(
+                Component.literal(
+                        "Cannot complete quest: " + result
+                )
+        );
+
+        return 0;
     }
 }
