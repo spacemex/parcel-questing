@@ -15,9 +15,9 @@ public final class QuestGroupService {
     public static void initialize() {
         if (Platform.isModLoaded("ftbteams")) {
             provider = new FTBTeamsGroupProvider();
+            ParcelQuesting.LOGGER.info("Detected Mod FTB Teams, setting provider to {}", provider);
         }
-
-        ParcelQuesting.LOGGER.info("Detected Mod FTB Teams, using as setting provide to {}", provider);
+        ParcelQuesting.LOGGER.info("No Group Provider Found, setting provider to {}", provider);
     }
 
     public static Optional<QuestGroupId> getGroupFor(ServerPlayer player) {
