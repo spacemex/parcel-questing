@@ -59,12 +59,22 @@ public record Quest(Identifier id, String title, String description, Identifier 
 
     private static DataResult<Quest> validate(Quest quest) {
         Set<String> ids = new HashSet<>();
+        Set<String> progressKeys = new HashSet<>();
 
         for (Requirement requirement : quest.requirements()) {
             String id = requirement.uniqueIdentifier();
+            String progressKey = requirement.progressKey();
 
             if (!ids.add(id)) {
                 return DataResult.error(() -> "Duplicate requirement ID '" + id + "' in quest " + quest.id());
+            }
+
+            if (progressKey == null || progressKey.isBlank()) {
+                return DataResult.error(() -> "Invalid progress key for requirement " + id + " in quest " + quest.id());
+            }
+
+            if (!progressKeys.add(progressKey)) {
+                return DataResult.error(() -> "Duplicate progress key '" + progressKey + "' in quest " + quest.id());
             }
         }
 
@@ -74,5 +84,4 @@ public record Quest(Identifier id, String title, String description, Identifier 
 
         return DataResult.success(quest);
     }
-
 }

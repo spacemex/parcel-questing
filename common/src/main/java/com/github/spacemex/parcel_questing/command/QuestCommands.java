@@ -1,5 +1,6 @@
 package com.github.spacemex.parcel_questing.command;
 
+import com.github.spacemex.parcel_questing.ParcelQuesting;
 import com.github.spacemex.parcel_questing.quest.QuestAcceptStatus;
 import com.github.spacemex.parcel_questing.quest.QuestService;
 import com.github.spacemex.parcel_questing.quest.group.QuestGroupId;
@@ -124,11 +125,18 @@ public final class QuestCommands {
 
         QuestProgress quest = progress.get();
 
+        boolean ready = ParcelQuesting.QUESTS.get(id)
+                .map(definition ->
+                        QuestService.isReadyToComplete(definition, quest)
+                )
+                .orElse(false);
+
         context.getSource().sendSuccess(
                 () -> Component.literal(
                         "Quest: " + id
                                 + " | Active: " + quest.active()
                                 + " | Completed: " + quest.completedCount()
+                                + " | Ready: " + ready
                 ),
                 false
         );

@@ -8,4 +8,8 @@ public interface Requirement {
     Identifier type();
 
     String progressKey();
+
+    default boolean isSatisfied(long progress) {
+        return progress >= 1;
+    }
 }
